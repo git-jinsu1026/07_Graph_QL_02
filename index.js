@@ -34,10 +34,22 @@ const resolvers = {
     }
 }
 
+const schema = makeExecutableSchema({
+    typeDefs,
+    resolvers
+})
 
+server.use('/graphql', bodyParser.json(), graphExpress({
+    schema
+}))
 
+server.use('/graphiql', grahpiqlExpress({
+    endpoint: '/graphiql'
+}))
 
-
+server.listen(PORT, () => {
+    console.log('Running 포트')
+})
 
 
 
